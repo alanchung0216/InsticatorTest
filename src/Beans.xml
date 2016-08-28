@@ -9,7 +9,9 @@
        <property name="message" value="Hello World!"/>
    </bean>
    <bean id="Employee" class="com.insticator.Employee">
-       <property name="firstName" value="Alan"/>
+       <property name="firstName" value="John"/>
+       <property name="lastName" value="Amith"/>
+       <property name="salary" value="100000"/>
    </bean>   
 
 </beans>

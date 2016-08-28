@@ -1,0 +1,1 @@
+[{"fname":"Deb","lname":"Kim","type":"emp"},{"fname":"John","lname":"Smith","vacation":15,"type":"fulltime","salary":80000},{"fname":"Tom","lname":"Kite","workhours":5,"type":"partime","salary":50000},{"fname":"Lisa","lname":"Clark","type":"intern","wage":20},{"fname":"Doug","lname":"Hill","overtimehours":9,"type":"contracter","wage":50}]

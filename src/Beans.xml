@@ -9,8 +9,18 @@
        <property name="message" value="Hello World!"/>
    </bean>
    <bean id="Employee" class="com.insticator.Employee">
+   <!--
        <property name="firstName" value="John"/>
        <property name="lastName" value="Smith"/>
+   -->
    </bean>   
-
+   <bean id="Fulltime" class="com.insticator.Fulltime" parent="Employee">
+   </bean>
+   <bean id="Parttime" class="com.insticator.Parttime" parent="Employee">
+   </bean>
+   <bean id="Intern" class="com.insticator.Intern" parent="Employee">
+   </bean>
+   <bean id="Contracter" class="com.insticator.Contracter" parent="Employee">
+   </bean>  
+     
 </beans>

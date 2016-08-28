@@ -19,10 +19,28 @@ public class ProcessEmployee {
 	ApplicationContext context = 
 	       new ClassPathXmlApplicationContext("Beans.xml");
 	
-	Employee obj = (Employee) context.getBean("Employee");
-	
-	System.out.println("Your FirstName : " + obj.getFirstName());
-      
+	Employee obj1 = (Employee) context.getBean("Employee");
+	obj1.setFirstName("Deb");
+	obj1.setLastName("Kim");
+	System.out.println(" First name "+obj1.getFirstName());
+	Fulltime obj2 = (Fulltime) context.getBean("Fulltime");
+	obj2.setFirstName("John");
+	obj2.setLastName("Smith");
+	//obj2.setSalary(80000);
+	System.out.println(" First name "+obj2.getFirstName());
+	Parttime obj3 = (Parttime) context.getBean("Parttime");
+	obj3.setFirstName("Tom");
+	obj3.setLastName("Kite");
+	//System.out.println(" First name "+obj3.getFirstName());
+	//obj3.setSalary(50000);
+	Intern obj4 = (Intern) context.getBean("Intern");
+	obj4.setFirstName("Lisa");
+	obj4.setLastName("Clark");
+	obj4.setWage(20);
+	Contracter obj5 = (Contracter) context.getBean("Contracter");
+	obj5.setFirstName("Doug");
+	obj5.setLastName("Hill");	
+	obj5.setWage(60);
 	   try{
 		   factory = new Configuration().configure().buildSessionFactory();
 	   }catch (Throwable ex) { 
@@ -32,10 +50,11 @@ public class ProcessEmployee {
      
 	   ProcessEmployee PE = new ProcessEmployee();
       /* Add few employee records in database */
-      Integer empID1 = PE.addEmployee(obj);
-      //Integer empID1 = PE.addEmployee("Zara", "Ali");
-      //Integer empID2 = PE.addEmployee("Daisy", "Das", 5000);
-      //Integer empID3 = PE.addEmployee("John", "Paul", 10000);
+      Integer empID1 = PE.addEmployee(obj1);
+      //Integer empID2 = PE.addFulltime(obj2);
+      //Integer empID3 = PE.addEmployee(obj3);
+      //Integer empID4 = PE.addEmployee(obj4);
+      //Integer empID5 = PE.addEmployee(obj5);
 
       /* List down all the employees */
       PE.listEmployees();
@@ -47,8 +66,27 @@ public class ProcessEmployee {
 //      PE.deleteEmployee(empID2);
 
       /* List down new list of the employees */
-      PE.listEmployees();
+//      PE.listEmployees();
    }
+   public Integer addFulltime(Fulltime employee){
+	//public Integer addEmployee(String fname, String lname){	   
+   
+      Session session = factory.openSession();
+      Transaction tx = null;
+      Integer employeeID = null;
+      try{
+         tx = session.beginTransaction();
+         //Employee employee = new Employee(fname, lname);
+         employeeID = (Integer) session.save(employee); 
+         tx.commit();
+      }catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace(); 
+      }finally {
+         session.close(); 
+      }
+      return employeeID;
+   }   
    /* Method to CREATE an employee in the database */
    public Integer addEmployee(Employee employee){
 	//public Integer addEmployee(String fname, String lname){	   
@@ -75,7 +113,8 @@ public class ProcessEmployee {
       Transaction tx = null;
       try{
          tx = session.beginTransaction();
-         List employees = session.createQuery("FROM Employee").list(); 
+         //List employees = session.createQuery("FROM Employee").list(); 
+         List employees = (List) session.createQuery("FROM Employee");
          for (Iterator iterator = 
                            employees.iterator(); iterator.hasNext();){
             Employee employee = (Employee) iterator.next(); 

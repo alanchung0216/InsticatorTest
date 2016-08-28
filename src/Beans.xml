@@ -10,7 +10,7 @@
    </bean>
    <bean id="Employee" class="com.insticator.Employee">
        <property name="firstName" value="John"/>
-       <property name="lastName" value="Amith"/>
+       <property name="lastName" value="Smith"/>
    </bean>   
 
 </beans>

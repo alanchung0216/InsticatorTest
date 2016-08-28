@@ -4,15 +4,35 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="com.insticator.Employee" table="EMPLOYEE">
+   <class name="com.insticator.Employee" table="EMPLOYEE" discriminator-value="emp">
       <meta attribute="class-description">
          This class contains the employee detail. 
       </meta>
       <id name="id" type="int" column="ID">
          <generator class="increment"/>
       </id>
-      
+      <discriminator column="type" type="string"></discriminator> 
       <property name="firstName" column="FIRST_NAME" type="string"/>
       <property name="lastName" column="LAST_NAME" type="string"/>
-   </class>
-</hibernate-mapping>
+            
+	<subclass name="com.insticator.Fulltime" discriminator-value="fulltime_emp">  
+	<property name="salary" column="SALARY" type="string" />  
+	<property name="vacation" column="VACATION" type="string" />  
+	</subclass>  
+
+	<subclass name="com.insticator.Parttime" discriminator-value="parttime_emp">  
+	<property name="salary" column="SALARY" type="string" />  
+	<property name="workhours" column="WORKHOURS" type="string" />  
+	</subclass> 
+	
+	<subclass name="com.insticator.Intern" discriminator-value="intern_emp">  
+	<property name="wage" column="WAGE" type="string" />  
+	</subclass> 	            
+
+	<subclass name="com.insticator.Contracter" discriminator-value="contract_emp">  
+	<property name="wage" column="WAGE" type="string" />  
+	<property name="overtimehours" column="OVERTIMEHOURS" type="string" />
+	</subclass>
+
+  </class>  
+  </hibernate-mapping> 

@@ -11,7 +11,6 @@
    <bean id="Employee" class="com.insticator.Employee">
        <property name="firstName" value="John"/>
        <property name="lastName" value="Amith"/>
-       <property name="salary" value="100000"/>
    </bean>   
 
 </beans>

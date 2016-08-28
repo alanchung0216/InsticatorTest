@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ProcessEmployee {
-   private static SessionFactory factory; 
+   public static SessionFactory factory; 
    public static void main(String[] args) {
  
 	ApplicationContext context = 
@@ -33,7 +33,7 @@ public class ProcessEmployee {
 	   ProcessEmployee PE = new ProcessEmployee();
       /* Add few employee records in database */
       Integer empID1 = PE.addEmployee(obj);
-      //Integer empID1 = PE.addEmployee("Zara", "Ali", 1000);
+      //Integer empID1 = PE.addEmployee("Zara", "Ali");
       //Integer empID2 = PE.addEmployee("Daisy", "Das", 5000);
       //Integer empID3 = PE.addEmployee("John", "Paul", 10000);
 
@@ -51,14 +51,14 @@ public class ProcessEmployee {
    }
    /* Method to CREATE an employee in the database */
    public Integer addEmployee(Employee employee){
-	//public Integer addEmployee(String fname, String lname, int salary){	   
+	//public Integer addEmployee(String fname, String lname){	   
    
       Session session = factory.openSession();
       Transaction tx = null;
       Integer employeeID = null;
       try{
          tx = session.beginTransaction();
-         //Employee employee = new Employee(fname, lname, salary);
+         //Employee employee = new Employee(fname, lname);
          employeeID = (Integer) session.save(employee); 
          tx.commit();
       }catch (HibernateException e) {
@@ -81,7 +81,7 @@ public class ProcessEmployee {
             Employee employee = (Employee) iterator.next(); 
             System.out.print("First Name: " + employee.getFirstName()); 
             System.out.print("  Last Name: " + employee.getLastName()); 
-            System.out.println("  Salary: " + employee.getSalary()); 
+            //System.out.println("  Salary: " + employee.getSalary()); 
          }
          tx.commit();
       }catch (HibernateException e) {
@@ -99,7 +99,7 @@ public class ProcessEmployee {
          tx = session.beginTransaction();
          Employee employee = 
                     (Employee)session.get(Employee.class, EmployeeID); 
-         employee.setSalary( salary );
+         //employee.setSalary( salary );
 		 session.update(employee); 
          tx.commit();
       }catch (HibernateException e) {

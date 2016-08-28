@@ -21,7 +21,7 @@
       postgres
    </property>
    <property name="hibernate.connection.password">
-      Harder12
+      postgres
    </property>
 
    <!-- List of XML mapping files -->

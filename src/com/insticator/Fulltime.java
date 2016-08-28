@@ -1,8 +1,8 @@
 package com.insticator;
 
 public class Fulltime extends Employee{
-	private int salary;
-	private int vacation;
+	private long salary;
+	private long vacation;
 	
 	public Fulltime() {
 		super();
@@ -11,16 +11,16 @@ public class Fulltime extends Employee{
 //	   this.firstName = fname;
 //	   this.lastName = lname;
 //	}	
-	public int getSalary() {
+	public long getSalary() {
 		   return salary;
 	}
-	public void setSalary( int salary ) {
+	public void setSalary( long salary ) {
 		   this.salary = salary;
 	}
-	public int getVacation() {
+	public long getVacation() {
 		   return vacation;
 	}
-	public void setVacation( int vacation ) {
+	public void setVacation( long vacation ) {
 		   this.vacation = vacation;
 	}	
 }

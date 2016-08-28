@@ -1,18 +1,18 @@
 package com.insticator;
 
 public class Contracter extends Employee {
-	private int wage;
-	private int overtimehours;
-	public int getWage() {
+	private long wage;
+	private long overtimehours;
+	public long getWage() {
 		   return wage;
 	}
-	public void setWage( int wage ) {
+	public void setWage( long wage ) {
 		   this.wage = wage;
 	}
-	public int getOvertimehours() {
+	public long getOvertimehours() {
 		   return overtimehours;
 	}
-	public void setOvertimehours( int overtimehours ) {
+	public void setOvertimehours( long overtimehours ) {
 		   this.overtimehours = overtimehours;
 	}		
 }

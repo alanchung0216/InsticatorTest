@@ -1,18 +1,18 @@
 package com.insticator;
 
 public class Parttime extends Employee {
-	private int salary;
-	private int workhours;
-	public int getSalary() {
+	private long salary;
+	private long workhours;
+	public long getSalary() {
 		   return salary;
 	}
-	public void setSalary( int salary ) {
+	public void setSalary( long salary ) {
 		   this.salary = salary;
 	}
-	public int getWorkhours() {
+	public long getWorkhours() {
 		   return workhours;
 	}
-	public void setWorkhours( int workhours ) {
+	public void setWorkhours( long workhours ) {
 		   this.workhours = workhours;
 	}	
 }

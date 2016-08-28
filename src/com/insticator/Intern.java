@@ -1,11 +1,11 @@
 package com.insticator;
 
 class Intern extends Employee {
-	private int wage;
-	public int getWage() {
+	private long wage;
+	public long getWage() {
 		   return wage;
 	}
-	public void setWage( int wage ) {
+	public void setWage( long wage ) {
 		   this.wage = wage;
 	}
 }

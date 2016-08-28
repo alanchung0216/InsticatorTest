@@ -16,22 +16,22 @@
       <property name="lastName" column="LAST_NAME" type="string"/>
             
 	<subclass name="com.insticator.Fulltime" discriminator-value="fulltime_emp">  
-	<property name="salary" column="SALARY" type="string" />  
-	<property name="vacation" column="VACATION" type="string" />  
+	<property name="salary" column="SALARY" type="long" />  
+	<property name="vacation" column="VACATION" type="long" />  
 	</subclass>  
 
 	<subclass name="com.insticator.Parttime" discriminator-value="parttime_emp">  
-	<property name="salary" column="SALARY" type="string" />  
-	<property name="workhours" column="WORKHOURS" type="string" />  
+	<property name="salary" column="SALARY" type="long" />  
+	<property name="workhours" column="WORKHOURS" type="long" />  
 	</subclass> 
 	
 	<subclass name="com.insticator.Intern" discriminator-value="intern_emp">  
-	<property name="wage" column="WAGE" type="string" />  
+	<property name="wage" column="WAGE" type="long" />  
 	</subclass> 	            
 
 	<subclass name="com.insticator.Contracter" discriminator-value="contract_emp">  
-	<property name="wage" column="WAGE" type="string" />  
-	<property name="overtimehours" column="OVERTIMEHOURS" type="string" />
+	<property name="wage" column="WAGE" type="long" />  
+	<property name="overtimehours" column="OVERTIMEHOURS" type="long" />
 	</subclass>
 
   </class>  

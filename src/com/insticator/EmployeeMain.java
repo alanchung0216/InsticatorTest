@@ -1,7 +1,6 @@
 package com.insticator;
 
 import java.util.List; 
-import java.util.Date;
 import java.util.Iterator; 
  
 import org.hibernate.SessionFactory;
@@ -13,23 +12,51 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.insticator.json.JSON_Read;
+import com.insticator.json.JSON_Write;
 import com.insticator.model.Contracter;
 import com.insticator.model.Employee;
 import com.insticator.model.Fulltime;
 import com.insticator.model.Parttime;
 import com.insticator.model.Intern;
 
+/*
+	this main program will do the followings
+	
+	1. create test employee data set in JSON format
+	2. read the test data set via JSON reader
+	3. use Spring framwork to inject employee and subclasses objects
+		and fill up object data based on employee types 
+		(employee,fulltime, partime, intern, contractor)
+	4. set up Hibernate connection to postgres data base
+		and map objects to one employee table which consists
+		of employee and subclasses data
+	5. do CRUD operations
+	6. finally write existing employess to a file with JSON format.
+		
+*/
+
 public class EmployeeMain {
    public static SessionFactory factory; 
    public static void main(String[] args) {
-	   
-	//JSON_Write createJSON = new JSON_Write();
-	//createJSON.writeJSON();
 
+	// 1. create test employee data set in JSON format  
+	   
+	JSON_Write createJSON = new JSON_Write();
+	createJSON.writeJSON();
+
+	// 2. read the test data set via JSON reader
+	
+	JSON_Read parseJSON = new JSON_Read();
+	
+	/*
+	 3. use Spring framwork to inject employee and subclasses objects
+		and fill up object data based on employee types 
+		(employee,fulltime, partime, intern, contractor) 
+	 */
+	
 	ApplicationContext context = 
 	       new ClassPathXmlApplicationContext("Beans.xml");
 	
-	JSON_Read parseJSON = new JSON_Read();
 	
 	Employee em = parseJSON.readJSON("emp");
 	Employee obj1 = (Employee) context.getBean("Employee");
@@ -77,40 +104,54 @@ public class EmployeeMain {
 	obj5.setOvertimehours(ct.getOvertimehours());
 	
 	//System.out.println(" First name "+obj5.getFirstName());
-	
-	
-	   try{
+	/*
+		4. set up Hibernate connection to postgres data base
+		and map objects to one employee table which consists
+		of employee and subclasses data	
+		see detail in hibernate.cfg.xml and Employee.hbm.xml
+	*/
+	  try{
 		   factory = new Configuration().configure().buildSessionFactory();
-	   }catch (Throwable ex) { 
+	  }catch (Throwable ex) { 
 		   System.err.println("Failed to create sessionFactory object." + ex);
 		   throw new ExceptionInInitializerError(ex); 
-	   }
+	  }
      
+	  /* 
+	   * 5 - Create employee records in database 
+	   */
 	  EmployeeMain PE = new EmployeeMain();
-      /* Add few employee records in database */
       Integer empID1 = PE.addEmployee(obj1);
       Integer empID2 = PE.addEmployee(obj2);
       Integer empID3 = PE.addEmployee(obj3);
       Integer empID4 = PE.addEmployee(obj4);
       Integer empID5 = PE.addEmployee(obj5);
 
-      /* List down all the employees */
+      /* 
+       * 5 - Read all the employees 
+       */
+      
       PE.listEmployees();
 
-      /* Update employee's records */
+      /* 
+       * 5 - Update employee's record 
+       */
+      
       System.out.println(" empID2 updated "+empID2);
       PE.updateEmployee(empID2, 90000);
 
-      /* Delete an employee from the database */
+      /* 5 - Delete an employee from the database */
       PE.deleteEmployee(empID4);
       System.out.println(" empID4  deleted "+empID4);
 
-      /* List down new list of the employees */
+      /* 
+       * 6 - finally write existing employess to a file with JSON format.
+       */
       PE.listEmployees();
    }
+   
    /* Method to CREATE an employee in the database */
-   public Integer addEmployee(Employee employee){
-	//public Integer addEmployee(String fname, String lname){	   
+   public Integer addEmployee(Employee employee){   
    
       Session session = factory.openSession();
       Transaction tx = null;
@@ -134,12 +175,11 @@ public class EmployeeMain {
       try{
          tx = session.beginTransaction();
          List employees = session.createQuery("FROM Employee").list(); 
-         for (Iterator iterator = 
-                           employees.iterator(); iterator.hasNext();){
+         Iterator iterator = employees.iterator();
+         while( iterator.hasNext()) {
             Employee employee = (Employee) iterator.next(); 
-            System.out.print("First Name: " + employee.getFirstName()); 
-            System.out.print("  Last Name: " + employee.getLastName()); 
-            System.out.println();
+            System.out.printf("First Name: %s",employee.getFirstName()); 
+            System.out.printf("  Last Name: %s%n",employee.getLastName()); 
          }
          tx.commit();
       }catch (HibernateException e) {

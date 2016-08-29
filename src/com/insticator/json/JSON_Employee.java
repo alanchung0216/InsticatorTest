@@ -2,19 +2,27 @@ package com.insticator.json;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class JSON_Write {
+import com.insticator.model.*;
+
+public class JSON_Employee {
 //     public static void main(String[] args) {
 
 //type | first_name | last_name | salary | vacation | workhours | wage | overtimehours
     	 
-// create testing employee JSON file
+// create employee JSON file
 	
-    public void writeJSON() {	 
-	    JSONArray list = new JSONArray();
-	    JSONObject obj1 = new JSONObject();
+    public void employeeJSON(List<Employee> emp) {	
+    	JSONArray list = new JSONArray();
+    	for (int i=0; i < emp.size(); i++){
+    		JSONObject obj = new JSONObject();
+    		if 
+    		
+    	}
 	    obj1.put("type", "emp");
 		obj1.put("fname", "Deborah");
 		obj1.put("lname", "Kim");

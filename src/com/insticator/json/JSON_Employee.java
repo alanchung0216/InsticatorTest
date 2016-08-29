@@ -16,13 +16,49 @@ public class JSON_Employee {
     	 
 // create employee JSON file
 	
-    public void employeeJSON(List<Employee> emp) {	
+    public void employeeJSON(List<Employee> employees) {	
     	JSONArray list = new JSONArray();
-    	for (int i=0; i < emp.size(); i++){
+    	for (int i=0; i < employees.size(); i++){
     		JSONObject obj = new JSONObject();
-    		if 
-    		
+    		Employee employee = employees.get(i);
+            if (employee instanceof Fulltime){
+           	 Fulltime ft = (Fulltime) employee;
+           	 //ft.setSalary(pay);
+            } else if (employee instanceof Parttime){
+           	 Parttime pt = (Parttime) employee;
+           	 //pt.setSalary(pay);
+            } else if (employee instanceof Intern) {
+           	 Intern it = (Intern) employee;
+           	 //it.setWage(pay);
+            } else if (employee instanceof Contracter) {
+           	 Contracter ct = (Contracter) employee;
+           	 //ct.setWage(pay);
+            } else {
+             // this is base class
+            }     		
     	}
+    }
+	JSONObject copyFulltime(Fulltime ft){
+		return null;
+		
+	}
+	JSONObject copyParttime(Parttime ft){
+		return null;
+		
+	}
+	JSONObject copyIntern(Intern ft){
+		return null;
+		
+	}
+	JSONObject copyContracter(Contracter ft){
+		return null;
+		
+	}
+	JSONObject copyEmployee(Employee ft){
+		return null;
+		
+	}
+	/*
 	    obj1.put("type", "emp");
 		obj1.put("fname", "Deborah");
 		obj1.put("lname", "Kim");
@@ -70,4 +106,5 @@ public class JSON_Employee {
 		System.out.print(list);
 		System.out.println("\n I am  DONE");
 	}
+	*/
 }

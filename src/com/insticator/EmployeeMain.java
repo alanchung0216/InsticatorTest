@@ -1,16 +1,20 @@
 package com.insticator;
 
-import java.util.List; 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Iterator; 
  
 import org.hibernate.SessionFactory;
 import org.hibernate.HibernateException; 
 import org.hibernate.cfg.Configuration;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.hibernate.Session; 
 import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.insticator.json.JSON_Employee;
 import com.insticator.json.JSON_Read;
 import com.insticator.json.JSON_Write;
 import com.insticator.model.Contracter;
@@ -147,7 +151,9 @@ public class EmployeeMain {
       /* 
        * 6 - finally write existing employess to a file with JSON format.
        */
-      PE.listEmployees();
+      
+      JSON_Employee empJSON = new JSON_Employee();
+      empJSON.employeeJSON(PE.listEmployees());
    }
    
    /* Method to CREATE an employee in the database */
@@ -169,12 +175,13 @@ public class EmployeeMain {
       return employeeID;
    }
    /* Method to  READ all the employees */
-   public void listEmployees( ){
+   public List<Employee> listEmployees( ){
       Session session = factory.openSession();
       Transaction tx = null;
+      List<Employee> employees = new ArrayList<Employee>();
       try{
          tx = session.beginTransaction();
-         List employees = session.createQuery("FROM Employee").list(); 
+         employees = session.createQuery("FROM Employee").list(); 
          Iterator iterator = employees.iterator();
          while( iterator.hasNext()) {
             Employee employee = (Employee) iterator.next(); 
@@ -188,6 +195,7 @@ public class EmployeeMain {
       }finally {
          session.close(); 
       }
+      return employees;
    }
    /* Method to UPDATE salary for an employee */
    public void updateEmployee(Integer EmployeeID, int pay ){
@@ -255,4 +263,36 @@ public class EmployeeMain {
          session.close(); 
       }
    }
+   /*
+    *    
+    *   public void employeeJSON(List<Employee> emp) {	
+    	JSONArray list = new JSONArray();
+    	for (int i=0; i < emp.size(); i++){
+    		JSONObject obj = new JSONObject();
+    		if 
+    		
+    	}
+    */
+   /*
+    public void employeeJSON(List<Employee> emp){
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try{
+           tx = session.beginTransaction();
+           List employees = session.createQuery("FROM Employee").list(); 
+           Iterator iterator = employees.iterator();
+           while( iterator.hasNext()) {
+              Employee employee = (Employee) iterator.next(); 
+              System.out.printf("First Name: %s",employee.getFirstName()); 
+              System.out.printf("  Last Name: %s%n",employee.getLastName()); 
+           }
+           tx.commit();
+        }catch (HibernateException e) {
+           if (tx!=null) tx.rollback();
+           e.printStackTrace(); 
+        }finally {
+           session.close(); 
+        }
+     }
+     */
 }

@@ -5,22 +5,15 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-   <bean id="helloWorld" class="com.insticator.HelloWorld">
-       <property name="message" value="Hello World!"/>
-   </bean>
-   <bean id="Employee" class="com.insticator.Employee">
-   <!--
-       <property name="firstName" value="John"/>
-       <property name="lastName" value="Smith"/>
-   -->
+   <bean id="Employee" class="com.insticator.model.Employee">
    </bean>   
-   <bean id="Fulltime" class="com.insticator.Fulltime" parent="Employee">
+   <bean id="Fulltime" class="com.insticator.model.Fulltime" parent="Employee">
    </bean>
-   <bean id="Parttime" class="com.insticator.Parttime" parent="Employee">
+   <bean id="Parttime" class="com.insticator.model.Parttime" parent="Employee">
    </bean>
-   <bean id="Intern" class="com.insticator.Intern" parent="Employee">
+   <bean id="Intern" class="com.insticator.model.Intern" parent="Employee">
    </bean>
-   <bean id="Contracter" class="com.insticator.Contracter" parent="Employee">
+   <bean id="Contracter" class="com.insticator.model.Contracter" parent="Employee">
    </bean>  
      
 </beans>

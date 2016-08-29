@@ -12,7 +12,14 @@ import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ProcessEmployee {
+import com.insticator.json.JSON_Read;
+import com.insticator.model.Contracter;
+import com.insticator.model.Employee;
+import com.insticator.model.Fulltime;
+import com.insticator.model.Parttime;
+import com.insticator.model.Intern;
+
+public class EmployeeMain {
    public static SessionFactory factory; 
    public static void main(String[] args) {
 	   

@@ -1,4 +1,4 @@
-package com.insticator;
+package com.insticator.model;
 
 public class Contracter extends Employee {
 	private long wage;

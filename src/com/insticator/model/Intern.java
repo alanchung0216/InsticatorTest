@@ -1,6 +1,6 @@
-package com.insticator;
+package com.insticator.model;
 
-class Intern extends Employee {
+public class Intern extends Employee {
 	private long wage;
 	public long getWage() {
 		   return wage;

@@ -1,4 +1,4 @@
-package com.insticator;
+package com.insticator.model;
 /*
 Java:
 - There are multiple types of employee, include but not limit to full-time, part-time, intern.

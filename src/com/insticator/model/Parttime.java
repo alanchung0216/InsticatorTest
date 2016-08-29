@@ -1,4 +1,4 @@
-package com.insticator;
+package com.insticator.model;
 
 public class Parttime extends Employee {
 	private long salary;

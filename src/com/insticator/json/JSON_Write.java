@@ -1,4 +1,4 @@
-package com.insticator;
+package com.insticator.json;
 
 import java.io.FileWriter;
 import java.io.IOException;

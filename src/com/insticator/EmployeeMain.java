@@ -86,7 +86,7 @@ public class EmployeeMain {
 		   throw new ExceptionInInitializerError(ex); 
 	   }
      
-	   ProcessEmployee PE = new ProcessEmployee();
+	  EmployeeMain PE = new EmployeeMain();
       /* Add few employee records in database */
       Integer empID1 = PE.addEmployee(obj1);
       Integer empID2 = PE.addEmployee(obj2);

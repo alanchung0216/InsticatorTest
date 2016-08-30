@@ -26,16 +26,17 @@ import com.insticator.model.Intern;
 /*
 	this main program will do the followings
 	
-	1. create test employee data set in JSON format
-	2. read the test data set via JSON reader
+	1. create test employee data set in JSON format to "test.json"
+		
+	2. read the test data set via JSON reader from "test.json"
 	3. use Spring framwork to inject employee and subclasses objects
 		and fill up object data based on employee types 
 		(employee,fulltime, partime, intern, contractor)
 	4. set up Hibernate connection to postgres data base
 		and map objects to one employee table which consists
 		of employee and subclasses data
-	5. do CRUD operations
-	6. finally write existing employess to a file with JSON format.
+	5. do CRUD operations (CREATE, READ, UPDATE, DELETE)
+	6. finally write existing employess with JSON format to "employees.json".
 		
 */
 
@@ -43,30 +44,33 @@ public class EmployeeMain {
    public static SessionFactory factory; 
    public static void main(String[] args) {
 
-	// 1. create test employee data set in JSON format  
+	/*
+	 *  1. create test employee data set in JSON format  
+	 */
 	   
 	JSON_Write createJSON = new JSON_Write();
 	createJSON.writeJSON();
 
-	// 2. read the test data set via JSON reader
+	/*
+	 *  2. read the test data set via JSON reader
+	 */
 	
 	JSON_Read parseJSON = new JSON_Read();
 	
 	/*
-	 3. use Spring framwork to inject employee and subclasses objects
-		and fill up object data based on employee types 
-		(employee,fulltime, partime, intern, contractor) 
+	 *  3. use Spring framwork to inject employee and subclasses objects
+	 *	   and fill up object data based on employee types 
+	 *     (employee,fulltime, partime, intern, contractor) 
 	 */
 	
 	ApplicationContext context = 
 	       new ClassPathXmlApplicationContext("Beans.xml");
 	
-	
 	Employee em = parseJSON.readJSON("emp");
 	Employee obj1 = (Employee) context.getBean("Employee");
+
 	obj1.setFirstName(em.getFirstName());
 	obj1.setLastName(em.getLastName());
-	//System.out.println(" First name "+obj1.getFirstName());
 	
 	Fulltime obj2 = (Fulltime) context.getBean("Fulltime");
 	Fulltime ft = (Fulltime) parseJSON.readJSON("fulltime");
@@ -75,8 +79,6 @@ public class EmployeeMain {
 	obj2.setLastName(ft.getLastName());
 	obj2.setSalary(ft.getSalary());
 	obj2.setVacation(ft.getVacation());
-
-	//System.out.println(" First name "+obj2.getFirstName());
 		
 	Parttime obj3 = (Parttime) context.getBean("Parttime");
 	Parttime pt = (Parttime) parseJSON.readJSON("parttime");
@@ -85,20 +87,16 @@ public class EmployeeMain {
 	obj3.setLastName(pt.getLastName());
 	obj3.setSalary(pt.getSalary());
 	obj3.setWorkhours(pt.getWorkhours());
-		
-	//System.out.println(" First name "+obj3.getFirstName());
 
 		
 	Intern obj4 = (Intern) context.getBean("Intern");
 	Intern it = (Intern) parseJSON.readJSON("intern");
 	
+	
 	obj4.setFirstName(it.getFirstName());
 	obj4.setLastName(it.getLastName());
 	obj4.setWage(it.getWage());
-	
-	//System.out.println(" First name "+obj4.getFirstName());
-	
-	
+		
 	Contracter obj5 = (Contracter) context.getBean("Contracter");
 	Contracter ct = (Contracter) parseJSON.readJSON("contracter");
 	
@@ -107,13 +105,14 @@ public class EmployeeMain {
 	obj5.setWage(ct.getWage());
 	obj5.setOvertimehours(ct.getOvertimehours());
 	
-	//System.out.println(" First name "+obj5.getFirstName());
+
 	/*
 		4. set up Hibernate connection to postgres data base
 		and map objects to one employee table which consists
 		of employee and subclasses data	
 		see detail in hibernate.cfg.xml and Employee.hbm.xml
 	*/
+	
 	  try{
 		   factory = new Configuration().configure().buildSessionFactory();
 	  }catch (Throwable ex) { 
@@ -124,6 +123,7 @@ public class EmployeeMain {
 	  /* 
 	   * 5 - Create employee records in database 
 	   */
+	  
 	  EmployeeMain PE = new EmployeeMain();
       Integer empID1 = PE.addEmployee(obj1);
       Integer empID2 = PE.addEmployee(obj2);
@@ -141,12 +141,15 @@ public class EmployeeMain {
        * 5 - Update employee's record 
        */
       
-      System.out.println(" empID2 updated "+empID2);
+      System.out.println(" updated on empID   "+empID2);
       PE.updateEmployee(empID2, 90000);
 
-      /* 5 - Delete an employee from the database */
+      /* 
+       * 5 - Delete an employee from the database 
+       */
+      
       PE.deleteEmployee(empID4);
-      System.out.println(" empID4  deleted "+empID4);
+      System.out.println(" deleted on empID "+empID4);
 
       /* 
        * 6 - finally write existing employess to a file with JSON format.
@@ -154,9 +157,11 @@ public class EmployeeMain {
       
       JSON_Employee empJSON = new JSON_Employee();
       empJSON.employeeJSON(PE.listEmployees());
+      
    }
    
-   /* Method to CREATE an employee in the database */
+   /* CRUD Method - CREATE an employee in the database */
+   
    public Integer addEmployee(Employee employee){   
    
       Session session = factory.openSession();
@@ -174,7 +179,9 @@ public class EmployeeMain {
       }
       return employeeID;
    }
-   /* Method to  READ all the employees */
+   
+   /* CRUD Method - READ all the employees */
+   
    public List<Employee> listEmployees( ){
       Session session = factory.openSession();
       Transaction tx = null;
@@ -197,7 +204,9 @@ public class EmployeeMain {
       }
       return employees;
    }
-   /* Method to UPDATE salary for an employee */
+   
+   /* CRUD Method - UPDATE salary for an employee */
+   
    public void updateEmployee(Integer EmployeeID, int pay ){
       Session session = factory.openSession();
       Transaction tx = null;
@@ -232,7 +241,9 @@ public class EmployeeMain {
          session.close(); 
       }
    }
-   /* Method to DELETE an employee from the records */
+   
+   /* CRUD Method - DELETE an employee from the records */
+   
    public void deleteEmployee(Integer EmployeeID){
       Session session = factory.openSession();
       Transaction tx = null;
@@ -263,36 +274,4 @@ public class EmployeeMain {
          session.close(); 
       }
    }
-   /*
-    *    
-    *   public void employeeJSON(List<Employee> emp) {	
-    	JSONArray list = new JSONArray();
-    	for (int i=0; i < emp.size(); i++){
-    		JSONObject obj = new JSONObject();
-    		if 
-    		
-    	}
-    */
-   /*
-    public void employeeJSON(List<Employee> emp){
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try{
-           tx = session.beginTransaction();
-           List employees = session.createQuery("FROM Employee").list(); 
-           Iterator iterator = employees.iterator();
-           while( iterator.hasNext()) {
-              Employee employee = (Employee) iterator.next(); 
-              System.out.printf("First Name: %s",employee.getFirstName()); 
-              System.out.printf("  Last Name: %s%n",employee.getLastName()); 
-           }
-           tx.commit();
-        }catch (HibernateException e) {
-           if (tx!=null) tx.rollback();
-           e.printStackTrace(); 
-        }finally {
-           session.close(); 
-        }
-     }
-     */
 }

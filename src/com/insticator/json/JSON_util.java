@@ -22,8 +22,8 @@ JSONObject copyFulltime(Fulltime ft){
 	obj.put("type", "fulltime");
 	obj.put("fname", ft.getFirstName());
 	obj.put("lname", ft.getLastName());
-	obj.put("vacation", ft.getVacation());
 	obj.put("salary", ft.getSalary());		
+	obj.put("vacation", ft.getVacation());
 	return obj;		
 }
 JSONObject copyParttime(Parttime pt){
@@ -31,8 +31,8 @@ JSONObject copyParttime(Parttime pt){
 	obj.put("type", "parttime");
 	obj.put("fname", pt.getFirstName());
 	obj.put("lname", pt.getLastName());
+	obj.put("salary", pt.getSalary());		
 	obj.put("workhours", pt.getWorkhours());
-	obj.put("vacation", pt.getSalary());		
 	return obj;				
 }
 JSONObject copyIntern(Intern it){

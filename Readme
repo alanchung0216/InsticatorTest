@@ -23,13 +23,12 @@ Test Data: test.json. this file is created by JSON_Write
 {"fname":"Lisa","lname":"Clark","type":"intern","wage":20},
 {"fname":"Doug","lname":"Hill","overtimehours":9,"type":"contracter","wage":50}]  
 
-Existing employees Data: employees.json  
+Existing employees Data: employees.json. this file is created by JSON_Employees
 
 [{"fname":"Deborah","lname":"Kim","type":"emp"},
 {"fname":"Tom","lname":"Kite","workhours":5,"type":"parttime","salary":50000},
 {"fname":"Doug","lname":"Hill","overtimehours":9,"type":"contracter","wage":50},
-{"fname":"Johnny","lname":"Smith","vacation":15,"type":"fulltime","salary":90000},
-{"fname":"Deborah","lname":"Kim","type":"emp"},{"fname":"Tom","lname":"Kite","workhours":5,"type":"parttime","salary":50000},{"fname":"Doug","lname":"Hill","overtimehours":9,"type":"contracter","wage":50},{"fname":"Johnny","lname":"Smith","vacation":15,"type":"fulltime","salary":90000}]   
+{"fname":"Johnny","lname":"Smith","vacation":15,"type":"fulltime","salary":90000}]
 
 Data Base server installed on my machine is PosrGresQL
 

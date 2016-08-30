@@ -21,79 +21,26 @@ public class JSON_Employee {
     	for (int i=0; i < employees.size(); i++){
     		JSONObject obj = new JSONObject();
     		Employee employee = employees.get(i);
+    		JSON_util cp = new JSON_util();
             if (employee instanceof Fulltime){
-           	 Fulltime ft = (Fulltime) employee;
-           	 //ft.setSalary(pay);
+	           	 Fulltime ft = (Fulltime) employee;
+	           	 list.add(cp.copyFulltime(ft));
             } else if (employee instanceof Parttime){
-           	 Parttime pt = (Parttime) employee;
-           	 //pt.setSalary(pay);
+	           	 Parttime pt = (Parttime) employee;
+	           	 list.add(cp.copyParttime(pt));
             } else if (employee instanceof Intern) {
-           	 Intern it = (Intern) employee;
-           	 //it.setWage(pay);
+	           	 Intern it = (Intern) employee;
+	           	 list.add(cp.copyIntern(it));
             } else if (employee instanceof Contracter) {
-           	 Contracter ct = (Contracter) employee;
-           	 //ct.setWage(pay);
+	           	 Contracter ct = (Contracter) employee;
+	           	 list.add(cp.copyContracter(ct));
             } else {
-             // this is base class
+            	 list.add(cp.copyEmployee(employee));
             }     		
     	}
-    }
-	JSONObject copyFulltime(Fulltime ft){
-		return null;
-		
-	}
-	JSONObject copyParttime(Parttime ft){
-		return null;
-		
-	}
-	JSONObject copyIntern(Intern ft){
-		return null;
-		
-	}
-	JSONObject copyContracter(Contracter ft){
-		return null;
-		
-	}
-	JSONObject copyEmployee(Employee ft){
-		return null;
-		
-	}
-	/*
-	    obj1.put("type", "emp");
-		obj1.put("fname", "Deborah");
-		obj1.put("lname", "Kim");
-		list.add(obj1);
-	    JSONObject obj2 = new JSONObject();
-	    obj2.put("type", "fulltime");
-		obj2.put("fname", "Johnny");
-		obj2.put("lname", "Smith");
-		obj2.put("vacation", 15);
-		obj2.put("salary", 80000);
-		list.add(obj2);
-	    JSONObject obj3 = new JSONObject();
-	    obj3.put("type", "parttime");
-		obj3.put("fname", "Tom");
-		obj3.put("lname", "Kite");
-		obj3.put("salary", 50000);
-		obj3.put("workhours", 5);
-		list.add(obj3);	
-	    JSONObject obj4 = new JSONObject();
-	    obj4.put("type", "intern");
-		obj4.put("fname", "Lisa");
-		obj4.put("lname", "Clark");
-		obj4.put("wage", 20);
-		list.add(obj4);
-		JSONObject obj5 = new JSONObject();
-	    obj5.put("type", "contracter");
-		obj5.put("fname", "Doug");
-		obj5.put("lname", "Hill");
-		obj5.put("wage", 50);
-		obj5.put("overtimehours", 9);
-		list.add(obj5);	
-	
 		try {
-	
-			FileWriter file = new FileWriter("test.json");
+			
+			FileWriter file = new FileWriter("employees.json");
 			//file.write(obj.toJSONString());
 			file.write(list.toJSONString());
 			file.flush();
@@ -104,7 +51,7 @@ public class JSON_Employee {
 		}
 	
 		System.out.print(list);
-		System.out.println("\n I am  DONE");
-	}
-	*/
+		System.out.println("\n I am  DONE");    	
+    }
+
 }

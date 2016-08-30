@@ -1,4 +1,4 @@
-package com.insticator;
+package com.insticator.control;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -141,8 +141,8 @@ public class EmployeeMain {
 	 * 5 - Update employee's record 
 	 */
 	      
-	System.out.println(" updated on empID   "+empID2);
 	PE.updateEmployee(empID2, 90000);
+	System.out.println(" updated on empID   "+empID2);
 
 	/* 
 	 * 5 - Delete an employee from the database 

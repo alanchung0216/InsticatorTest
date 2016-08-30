@@ -47,8 +47,7 @@ public class JSON_Employee {
 			e.printStackTrace();
 		}
 	
-		System.out.print(list);
-		System.out.println("\n I am  DONE");    	
+		System.out.println(list);   	
     }
 
 }

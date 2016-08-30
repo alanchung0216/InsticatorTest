@@ -1,0 +1,59 @@
+Please see the code in
+
+https://github.com/alanchung0216/InsticatorTest
+
+this project will do the followings
+    
+    1. create test employee data set in JSON format to "test.json"       
+    2. read the test data set via JSON reader from "test.json"
+    3. use Spring framwork to inject employee and subclasses objects
+        and fill up object data based on employee types 
+        (employee,fulltime, partime, intern, contractor)
+    4. set up Hibernate connection to postgres data base
+        and map objects to one employee table which consists
+        of employee and subclasses data
+    5. do CRUD operations (CREATE, READ, UPDATE, DELETE)
+    6. finally write existing employess with JSON format to "employees.json".
+
+Test Data: test.json. this file is created by JSON_Write
+
+[{"fname":"Deborah","lname":"Kim","type":"emp"},
+{"fname":"Johnny","lname":"Smith","vacation":15,"type":"fulltime","salary":80000},
+{"fname":"Tom","lname":"Kite","workhours":5,"type":"parttime","salary":50000},
+{"fname":"Lisa","lname":"Clark","type":"intern","wage":20},
+{"fname":"Doug","lname":"Hill","overtimehours":9,"type":"contracter","wage":50}]  
+
+Existing employees Data: employees.json  
+
+[{"fname":"Deborah","lname":"Kim","type":"emp"},
+{"fname":"Tom","lname":"Kite","workhours":5,"type":"parttime","salary":50000},
+{"fname":"Doug","lname":"Hill","overtimehours":9,"type":"contracter","wage":50},
+{"fname":"Johnny","lname":"Smith","vacation":15,"type":"fulltime","salary":90000},
+{"fname":"Deborah","lname":"Kim","type":"emp"},{"fname":"Tom","lname":"Kite","workhours":5,"type":"parttime","salary":50000},{"fname":"Doug","lname":"Hill","overtimehours":9,"type":"contracter","wage":50},{"fname":"Johnny","lname":"Smith","vacation":15,"type":"fulltime","salary":90000}]   
+
+Data Base server installed on my machine is PosrGresQL
+
+Content after create employees
+
+postgres=# select * from employee;
+ id |     type     | first_name | last_name | salary | vacation | workhours | wage | overtimehours 
+----+--------------+------------+-----------+--------+----------+-----------+------+---------------
+  1 | emp          | Deborah    | Kim       |        |          |           |      |              
+  2 | fulltime_emp | Johnny     | Smith     |  80000 |       15 |           |      |              
+  3 | parttime_emp | Tom        | Kite      |  50000 |          |         5 |      |              
+  4 | intern_emp   | Lisa       | Clark     |        |          |           |   20 |              
+  5 | contract_emp | Doug       | Hill      |        |          |           |   50 |             9
+(5 rows)
+
+Content after one update for fulltime and one delete for intern operation
+
+postgres=# select * from employee order by id asc;
+ id |     type     | first_name | last_name | salary | vacation | workhours | wage | overtimehours 
+----+--------------+------------+-----------+--------+----------+-----------+------+---------------
+  1 | emp          | Deborah    | Kim       |        |          |           |      |              
+  2 | fulltime_emp | Johnny     | Smith     |  90000 |       15 |           |      |              
+  3 | parttime_emp | Tom        | Kite      |  50000 |          |         5 |      |              
+  5 | contract_emp | Doug       | Hill      |        |          |           |   50 |             9
+(4 rows)
+
+

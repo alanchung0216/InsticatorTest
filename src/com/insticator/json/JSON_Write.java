@@ -21,7 +21,7 @@ public class JSON_Write {
     public void writeJSON() {	 
 	    JSONArray list = new JSONArray();
 	    JSONObject obj1 = new JSONObject();
-	    JSON_util cp = new JSON_util();
+	    JSON_Util cp = new JSON_Util();
 	    
 	    Employee emp = new Employee("Deborah","Kim");
 	    //JSONObject copyEmployee(emp);

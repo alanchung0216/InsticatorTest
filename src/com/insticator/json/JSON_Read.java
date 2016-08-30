@@ -25,14 +25,15 @@ public class JSON_Read {
 	
 			Object obj = parser.parse(new FileReader("test.json"));
 			JSONArray list = (JSONArray) obj;
+			
 			// loop array
 			Iterator<JSONObject> iterator = list.iterator();
 			while (iterator.hasNext()) {
-				//System.out.println(iterator.next());
+
 				JSONObject jsonObject = (JSONObject) iterator.next();
 				String em_type = (String) jsonObject.get("type");
 				if (em_type != null){
-					//System.out.println(" em_type "+em_type);
+					
 					if ("emp".equals(type) && type.equals(em_type)) {
 						Employee em_obj = new Employee();
 						em_obj.setFirstName((String) jsonObject.get("fname"));

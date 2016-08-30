@@ -10,10 +10,7 @@ import org.json.simple.JSONObject;
 import com.insticator.model.*;
 
 public class JSON_Employee {
-//     public static void main(String[] args) {
 
-//type | first_name | last_name | salary | vacation | workhours | wage | overtimehours
-    	 
 // create employee JSON file
 	
     public void employeeJSON(List<Employee> employees) {	
@@ -21,7 +18,7 @@ public class JSON_Employee {
     	for (int i=0; i < employees.size(); i++){
     		JSONObject obj = new JSONObject();
     		Employee employee = employees.get(i);
-    		JSON_util cp = new JSON_util();
+    		JSON_Util cp = new JSON_Util();
             if (employee instanceof Fulltime){
 	           	 Fulltime ft = (Fulltime) employee;
 	           	 list.add(cp.copyFulltime(ft));
